@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { HashRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import PropsPage from './pages/PropsPage';
 import HandlingPage from './pages/HandlingPage';
 import StatePage from './pages/StatePage';
