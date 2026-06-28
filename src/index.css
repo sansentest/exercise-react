@@ -1,0 +1,29 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: 'Outfit', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+}
+
+@layer base {
+  body {
+    font-family: var(--font-sans);
+  }
+}
+
+/* Syntax Highlighting Styles */
+pre[class*="language-"] {
+  border-radius: 0;
+  margin: 0 !important;
+  padding: 1.5rem !important;
+  background: transparent !important; 
+}
+
+code[class*="language-"],
+pre[class*="language-"] {
+  font-size: 0.9rem;
+  font-family: var(--font-mono);
+  text-shadow: none !important;
+}
+
+/* We don't need copy-btn and file-path-badge here anymore as we'll use Tailwind classes */

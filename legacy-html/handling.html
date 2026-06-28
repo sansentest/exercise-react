@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>React Events: E-Commerce Practice</title>
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Google Fonts -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"
+    rel="stylesheet">
+
+  <!-- Prism CSS for Syntax Highlighting -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace'],
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    pre[class*="language-"] {
+      border-radius: 0.75rem;
+      margin: 1.5em 0;
+      padding: 1.5em;
+      background: #0f172a !important;
+      /* Slate 900 */
+    }
+
+    code[class*="language-"],
+    pre[class*="language-"] {
+      font-size: 0.9rem;
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .copy-btn {
+      position: absolute;
+      top: 0.5rem;
+      right: 0.5rem;
+      background: rgba(255, 255, 255, 0.1);
+      color: #fff;
+      border: none;
+      padding: 0.25rem 0.75rem;
+      border-radius: 0.375rem;
+      font-size: 0.75rem;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .copy-btn:hover {
+      background: rgba(255, 255, 255, 0.25);
+    }
+
+    .code-container {
+      position: relative;
+    }
+
+    .file-path-badge {
+      display: inline-block;
+      background: #e0e7ff;
+      color: #4338ca;
+      padding: 0.25rem 0.75rem;
+      border-radius: 0.375rem;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.85rem;
+      margin-bottom: 0.5rem;
+      font-weight: 600;
+    }
+  </style>
+</head>
+
+<body class="bg-slate-50 text-slate-800 antialiased selection:bg-blue-200 selection:text-blue-900">
+
+  <!-- Header -->
+  <header class="bg-gradient-to-r from-indigo-50 to-purple-100 border-b border-gray-200 py-12 shadow-sm">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6">
+
+      <!-- Navigation -->
+      <div class="flex justify-between items-center mb-6">
+
+        <!-- Logo -->
+        <a href="index.html" class="flex items-center gap-3">
+          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQYAVZa-qTINpjVxq0Wd6QNQ4qc9ERAxQItjw&s"
+            alt="SPI Logo" class="w-14 h-14 rounded-full border-4 border-white shadow-lg object-cover">
+
+          <div>
+            <h1 class="text-2xl font-bold text-indigo-700">
+              SPI.EDU
+            </h1>
+            <p class="text-sm text-gray-500">
+              React Learning Platform
+            </p>
+          </div>
+        </a>
+
+        <!-- Navigation Menu -->
+        <nav class="flex gap-6">
+          <a href="props.html" class="text-gray-600 hover:text-indigo-600 font-medium transition">
+            Props
+          </a>
+
+          <a href="handling.html" class="text-gray-600 hover:text-indigo-600 font-medium transition">
+            Handling Event
+          </a>
+        </nav>
+
+      </div>
+
+      <!-- Hero Content -->
+      <div class="max-w-4xl">
+        <span class="inline-block bg-indigo-100 text-indigo-600 px-4 py-1 rounded-full text-sm font-semibold mb-4">
+          Step-by-step Guide
+        </span>
+
+        <h2 class="text-4xl md:text-5xl font-extrabold text-gray-900 leading-tight mb-5">
+          Mastering React Props
+        </h2>
+
+        <p class="text-lg md:text-xl text-gray-600 mb-8">
+          Learn how to organize your React files properly and pass data
+          between components using Props. We are building the
+          <strong class="text-indigo-600">SN_Closing</strong>
+          E-Commerce UI!
+        </p>
+
+        <div class="flex gap-4">
+          <a href="props.html"
+            class="bg-indigo-600 hover:bg-indigo-700 text-white px-5 py-3 rounded-lg shadow-md transition">
+            Get Started
+          </a>
+
+          <a href="handling.html"
+            class="border border-indigo-600 text-indigo-600 hover:bg-indigo-50 px-5 py-3 rounded-lg transition">
+            Next Lesson
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- Content -->
+  <main class="max-w-4xl mx-auto px-4 sm:px-6 py-12 space-y-12">
+
+    <!-- Setup & Installations -->
+    <section class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 md:p-8">
+      <h2 class="text-2xl font-bold text-slate-900 mb-4 flex items-center gap-3">
+        <span
+          class="bg-blue-100 text-blue-700 w-10 h-10 rounded-full flex items-center justify-center text-xl">⚙️</span>
+        1. Setup & Installations
+      </h2>
+      <p class="text-slate-600 mb-4">Open your terminal and run these commands to install React Router and
+        Tailwind CSS:</p>
+
+      <div class="code-container">
+        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+        <pre><code class="language-bash"># 1. Create a new Vite app
+npm create vite@latest my-store -- --template react
+cd my-store
+npm install
+
+# 2. Install React Router DOM
+npm install react-router-dom
+
+</code></pre>
+      </div>
+    </section>
+
+    <!-- Folder Structure -->
+    <section class="bg-indigo-900 rounded-2xl shadow-lg border border-indigo-800 p-6 md:p-8 text-white">
+      <h2 class="text-2xl font-bold mb-4 flex items-center">
+        <span
+          class="bg-indigo-800 text-indigo-100 w-10 h-10 rounded-full flex items-center justify-center mr-3 text-xl">📁</span>
+        2. Project Structure
+      </h2>
+      <p class="text-indigo-200 mb-6">Create the following folders and files inside your <code>src</code>
+        directory before we start coding:</p>
+
+      <div class="bg-slate-900 p-6 rounded-xl font-mono text-sm leading-relaxed overflow-x-auto shadow-inner">
+        <span class="text-blue-400">my-store/</span><br />
+        └── <span class="text-blue-400 font-bold">src/</span><br />
+        &nbsp;&nbsp;&nbsp;&nbsp;├── <span class="text-green-400 font-bold">App.jsx</span> <span
+          class="text-gray-400 italic">← (Main file with Router & State)</span><br />
+        &nbsp;&nbsp;&nbsp;&nbsp;│<br />
+        &nbsp;&nbsp;&nbsp;&nbsp;└── <span class="text-purple-400 font-bold">pages/</span> <span
+          class="text-gray-400 italic">← (Create this new folder)</span><br />
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;├── <span class="text-yellow-300">TShirtPage.jsx</span>
+        <span class="text-gray-400 italic">← (Page 1: Example)</span><br />
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└── <span class="text-yellow-300">SneakerPage.jsx</span>
+        <span class="text-gray-400 italic">← (Page 2: Your Challenge)</span><br />
+      </div>
+    </section>
+
+    <!-- Step 3: Main Code -->
+    <section
+      class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 md:p-8 hover:shadow-md transition-shadow">
+      <h2 class="text-2xl font-bold text-slate-900 mb-4 flex items-center gap-3">
+        <span
+          class="bg-blue-100 text-blue-700 w-10 h-10 rounded-full flex items-center justify-center text-xl">🌐</span>
+        3. The App Router
+      </h2>
+      <p class="text-slate-600 mb-4">In this lesson, we will keep things simple. <code>App.jsx</code> will only
+        handle routing between our pages. No State or Props are needed here!</p>
+
+      <div class="file-path-badge">📁 src / App.jsx</div>
+      <div class="code-container">
+        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+        <pre><code class="language-jsx">import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import TShirtPage from './pages/TShirtPage';
+import SneakerPage from './pages/SneakerPage';
+
+export default function App() {
+  return (
+    &lt;Router&gt;
+      &lt;Routes&gt;
+        &lt;Route path="/" element={&lt;TShirtPage /&gt;} /&gt;
+        &lt;Route path="/sneaker" element={&lt;SneakerPage /&gt;} /&gt;
+      &lt;/Routes&gt;
+    &lt;/Router&gt;
+  );
+}</code></pre>
+      </div>
+    </section>
+
+    <!-- Step 4: TShirtPage Example -->
+    <section
+      class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 md:p-8 hover:shadow-md transition-shadow">
+      <h2 class="text-2xl font-bold text-slate-900 mb-4 flex items-center gap-3">
+        <span
+          class="bg-blue-100 text-blue-700 w-10 h-10 rounded-full flex items-center justify-center text-xl">👕</span>
+        4. The T-Shirt Page (Events & State)
+      </h2>
+      <p class="text-slate-600 mb-4">Here is where the magic happens! We keep the State and the Event Functions
+        right inside the page component. Note the empty <code>handleClearCart</code> function—you will need this
+        later!</p>
+
+      <div class="file-path-badge">📁 src / pages / TShirtPage.jsx</div>
+      <div class="code-container">
+        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+        <pre><code class="language-jsx">import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+
+export default function TShirtPage() {
+  // 1. State to track cart items
+  const [cartCount, setCartCount] = useState(0);
+
+  // 2. Event Handler: Add to Cart
+  const handleAddToCart = () => {
+    setCartCount(cartCount + 1);
+  };
+
+  // 3. Event Handler: Clear Cart
+  const handleClearCart = () => {
+    // 🎯 STUDENT CHALLENGE: Write the code to set cartCount back to 0
+    
+  };
+
+  return (
+    &lt;div className="min-h-screen bg-gray-50 font-sans"&gt;
+      
+      {/* Navbar Section */}
+      &lt;nav className="bg-white p-4 shadow-sm flex justify-between items-center px-8"&gt;
+        &lt;h1 className="text-2xl font-black text-blue-600"&gt;SN_STORE&lt;/h1&gt;
+        
+        {/* Navigation Links */}
+        &lt;div className="space-x-6"&gt;
+          &lt;Link to="/" className="font-medium text-blue-600"&gt;T-Shirt&lt;/Link&gt;
+          &lt;Link to="/sneaker" className="font-medium text-gray-600 hover:text-blue-600"&gt;Sneakers&lt;/Link&gt;
+        &lt;/div&gt;
+
+        {/* Cart Info */}
+        &lt;div className="font-bold text-gray-700"&gt;
+          Cart: &lt;span className="bg-blue-600 text-white px-2 py-1 rounded-full text-sm"&gt;{cartCount}&lt;/span&gt;
+        &lt;/div&gt;
+      &lt;/nav&gt;
+
+      {/* Main Content Section */}
+      &lt;div className="p-10 flex flex-col items-center"&gt;
+        
+        {/* Product Card */}
+        &lt;div className="bg-white p-5 rounded-2xl shadow-md max-w-sm w-full border border-gray-100"&gt;
+          &lt;div className="bg-gray-200 h-64 rounded-xl mb-4 overflow-hidden"&gt;
+            &lt;img 
+              src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=500" 
+              alt="T-shirt" 
+              className="w-full h-full object-cover" 
+            /&gt;
+          &lt;/div&gt;
+
+          &lt;h2 className="text-xl font-bold text-gray-800"&gt;Classic White Tee&lt;/h2&gt;
+          &lt;p className="text-blue-600 font-bold text-lg mt-1 mb-4"&gt;$25.00&lt;/p&gt;
+
+          {/* Add to Cart Button (onClick) */}
+          &lt;button
+            onClick={handleAddToCart}
+            className="w-full bg-black hover:bg-gray-800 text-white font-bold py-3 px-4 rounded-xl transition-all active:scale-95"
+          &gt;
+            Add to Cart
+          &lt;/button&gt;
+          
+          {/* Note: No Clear button here. You will add it in SneakerPage! */}
+        &lt;/div&gt;
+
+      &lt;/div&gt;
+    &lt;/div&gt;
+  );
+}</code></pre>
+      </div>
+    </section>
+
+    <!-- Step 5: SneakerPage Challenge Design -->
+    <section
+      class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 md:p-8 hover:shadow-md transition-shadow">
+      <h2 class="text-2xl font-bold text-slate-900 mb-4 flex items-center gap-3">
+        <span
+          class="bg-blue-100 text-blue-700 w-10 h-10 rounded-full flex items-center justify-center text-xl">👟</span>
+        5. The Sneaker Page (UI Designed)
+      </h2>
+      <p class="text-slate-600 mb-4">Here is the fully designed Sneaker Page. It receives both <code>onAdd</code>
+        and <code>onClear</code> props, but the buttons don't have events yet!</p>
+
+      <div class="file-path-badge">📁 src / pages / SneakerPage.jsx</div>
+      <div class="code-container">
+        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+        <pre><code class="language-jsx">import React from 'react';
+import { Link } from 'react-router-dom';
+
+export default function SneakerPage( ) {
+  return (
+    &lt;div className="p-10 flex flex-col items-center"&gt;
+      &lt;div className="bg-white p-5 rounded-2xl shadow-md max-w-sm w-full border border-gray-100"&gt;
+        &lt;div className="bg-gray-200 h-64 rounded-xl mb-4 overflow-hidden"&gt;
+          &lt;img 
+            src="https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?w=500" 
+            alt="Sneaker" 
+            className="w-full h-full object-cover" 
+          /&gt;
+        &lt;/div&gt;
+
+        &lt;h2 className="text-xl font-bold text-gray-800"&gt;Air Max Pro&lt;/h2&gt;
+        &lt;p className="text-blue-600 font-bold text-lg mt-1 mb-4"&gt;$120.00&lt;/p&gt;
+
+        &lt;div className="space-y-3"&gt;
+          {/* 🎯 Challenge: Make this button work! */}
+          &lt;button className="w-full bg-black hover:bg-gray-800 text-white font-bold py-3 px-4 rounded-xl transition-all active:scale-95"&gt;
+            Add to Cart
+          &lt;/button&gt;
+
+          {/* 🎯 Challenge: Make this button work! */}
+          &lt;button className="w-full bg-red-50 hover:bg-red-100 text-red-600 font-bold py-3 px-4 rounded-xl transition-all border border-red-200 active:scale-95"&gt;
+            Clear Cart
+          &lt;/button&gt;
+        &lt;/div&gt;
+
+      &lt;/div&gt;
+    &lt;/div&gt;
+  );
+}</code></pre>
+      </div>
+    </section>
+
+    <!-- Challenge Instructions -->
+    <section
+      class="bg-gradient-to-br from-indigo-600 to-blue-700 rounded-2xl shadow-xl p-8 md:p-10 text-white relative overflow-hidden">
+      <!-- Decorative Elements -->
+      <div class="absolute -right-10 -top-10 w-40 h-40 bg-white opacity-10 rounded-full blur-2xl"></div>
+      <div class="absolute -left-10 -bottom-10 w-40 h-40 bg-blue-400 opacity-20 rounded-full blur-2xl"></div>
+
+      <h2 class="text-3xl font-extrabold mb-4 flex items-center gap-3 relative z-10">
+        <span
+          class="bg-white text-indigo-600 w-12 h-12 rounded-full flex items-center justify-center text-2xl shadow-md">🎯</span>
+        Student Challenge!
+      </h2>
+      <p class="text-indigo-100 mb-6 text-lg relative z-10 font-medium">Your E-commerce site is almost ready!
+        Finish the final touches by making the buttons on the Sneaker page work.</p>
+
+      <div class="bg-black/20 backdrop-blur-sm p-6 rounded-xl border border-white/10 relative z-10">
+        <h3 class="font-bold text-white mb-3 text-lg">Your Tasks:</h3>
+        <ol class="list-decimal list-inside space-y-4 text-indigo-50 font-medium">
+          <li>Go to <code>TShirtPage.jsx</code> and write the code inside <code>handleClearCart</code> to reset the
+            <code>cartCount</code> state to <strong>0</strong>.
+          </li>
+          <li>Go to <code>SneakerPage.jsx</code> and look at the "Add to Cart" button. Add the
+            <code>onClick</code> attribute and set it to <code>onAdd</code>.
+          </li>
+          <li>Look at the "Clear Cart" button. Add the <code>onClick</code> attribute and set it to
+            <code>onClear</code>.
+          </li>
+          <li>Save all files, go to your browser, click "Sneakers" in the menu, and test your buttons!</li>
+        </ol>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="text-center py-8 text-slate-500 text-sm border-t border-slate-200 mt-12 bg-white">
+    &copy; 2026 ICT Teacher Resource. Built for modern React students.
+  </footer>
+
+  <!-- Prism JS for Code Highlighting -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-jsx.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-bash.min.js"></script>
+
+  <!-- Script for Copy Button -->
+  <script>
+    function copyCode(button) {
+      const codeBlock = button.nextElementSibling;
+      const textToCopy = codeBlock.innerText;
+
+      navigator.clipboard.writeText(textToCopy).then(() => {
+        const originalText = button.innerText;
+        button.innerText = 'Copied! ✓';
+        button.style.background = '#4f46e5'; // Indigo 600
+        button.style.color = '#fff';
+
+        setTimeout(() => {
+          button.innerText = originalText;
+          button.style.background = 'rgba(255, 255, 255, 0.1)';
+        }, 2000);
+      }).catch(err => {
+        console.error('Failed to copy text: ', err);
+      });
+    }
+  </script>
+</body>
+
+</html>
