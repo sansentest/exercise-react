@@ -262,12 +262,13 @@ export default function App() {
              <Target className="w-6 h-6 text-pink-600" />
              Student Challenge: Create WomenPage!
           </h3>
-          <p className="text-slate-700 mb-4 text-lg">Follow these steps to build the <strong>Women's Collection</strong> page:</p>
+          <p className="text-slate-700 mb-4 text-lg">Follow these steps to build the <strong>Women's Collection</strong> page by creating and passing a new array of data:</p>
           <ol className="list-decimal list-inside space-y-4 text-slate-700 font-medium text-lg">
+            <li>In <code className="bg-white border border-slate-200 px-2 py-1 rounded font-mono text-base">App.jsx</code>, create a brand new array called <code className="bg-white border border-slate-200 px-2 py-1 rounded font-mono text-base">womenProducts</code> and add 2-3 new product objects to it.</li>
             <li>Create a new file named <code className="bg-white border border-slate-200 px-2 py-1 rounded font-mono text-base">WomenPage.jsx</code> inside the <code className="bg-white border border-slate-200 px-2 py-1 rounded font-mono text-base">src/components/pages/</code> folder.</li>
-            <li>Write the code similar to <code className="bg-white border border-slate-200 px-2 py-1 rounded font-mono text-base">MenPage.jsx</code>, but change the logic to filter products where <code className="bg-white border border-slate-200 px-2 py-1 rounded font-mono text-base">category === "Women"</code>.</li>
-            <li>Go to <code className="bg-white border border-slate-200 px-2 py-1 rounded font-mono text-base">App.jsx</code>, import your new <code className="bg-white border border-slate-200 px-2 py-1 rounded font-mono text-base">WomenPage</code>, and add a new <code className="bg-white border border-slate-200 px-2 py-1 rounded font-mono text-base">&lt;Route path="/women" ... /&gt;</code> inside the Routes.</li>
-            <li>Go to <code className="bg-white border border-slate-200 px-2 py-1 rounded font-mono text-base">Navbar.jsx</code> and update the Women navigation link to use <code className="bg-white border border-slate-200 px-2 py-1 rounded font-mono text-base">&lt;Link to="/women"&gt;Women&lt;/Link&gt;</code>.</li>
+            <li>In <code className="bg-white border border-slate-200 px-2 py-1 rounded font-mono text-base">App.jsx</code>, pass your new array as a prop to your new page like this: <code className="bg-white border border-slate-200 px-2 py-1 rounded font-mono text-base">&lt;WomenPage data=&#123;womenProducts&#125; /&gt;</code> inside the Routes.</li>
+            <li>Inside <code className="bg-white border border-slate-200 px-2 py-1 rounded font-mono text-base">WomenPage.jsx</code>, receive the <code className="bg-white border border-slate-200 px-2 py-1 rounded font-mono text-base">data</code> prop and use <code className="bg-white border border-slate-200 px-2 py-1 rounded font-mono text-base">.map()</code> to render a <code className="bg-white border border-slate-200 px-2 py-1 rounded font-mono text-base">ProductCard</code> for each item!</li>
+            <li>Finally, go to <code className="bg-white border border-slate-200 px-2 py-1 rounded font-mono text-base">Navbar.jsx</code> and update the Women link to <code className="bg-white border border-slate-200 px-2 py-1 rounded font-mono text-base">&lt;Link to="/women"&gt;Women&lt;/Link&gt;</code>.</li>
           </ol>
         </section>
 
