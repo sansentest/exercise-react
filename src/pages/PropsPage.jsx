@@ -5,10 +5,15 @@ import { Link } from 'react-router-dom';
 import { Folder, Layout, ArrowRight, ArrowLeft, Target, Play, Globe } from 'lucide-react';
 
 export default function PropsPage() {
-  const step1Code = `# Install React Router & Icons
+  const step1Code = `
+  # 1. Create a new Vite app
+npm create vite@latest react-store -- --template react
+cd react-store
+
+  #2 Install React Router & Icons
 npm install lucide-react react-router-dom
 
-# Install Tailwind CSS v4
+#3 Install Tailwind CSS v4
 npm install tailwindcss @tailwindcss/vite`;
   
   const step2Code = `import React from 'react';
